@@ -27,5 +27,19 @@
             Assert.Equal(30, people["eusebio"]);
 
         }
+
+        [Fact]
+        public void Should_Detect_Keys_On_Dictionary() {
+            Dictionary<string, int> people = new() { { "almudena", 30 }, { "maximiliano", 45 }, { "eusebio", 30 } };
+
+            Assert.True(people.ContainsAnyKey(["almudena", "superman", "power ranger"]));
+            Assert.True(people.ContainsAnyKey(["almudena", "maximiliano"]));
+            Assert.False(people.ContainsAnyKey(["titan", "platanito"]));
+
+            Assert.True(people.ContainsAllKeys(["maximiliano"]));
+            Assert.True(people.ContainsAllKeys(["maximiliano", "eusebio"]));
+            Assert.True(people.ContainsAllKeys(["almudena", "maximiliano", "eusebio"]));
+            Assert.False(people.ContainsAllKeys(["john doe", "almudena", "maximiliano", "eusebio"]));
+        }
     }
 }
