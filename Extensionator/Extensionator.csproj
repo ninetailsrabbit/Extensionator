@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>Extensionator</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<NoWarn>1591,1573,8601</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Title>Ninetailsrabbit.Extensionator</Title>
+		<Version>0.2.2</Version>
+		<Description>Boost your Godot workflow with Extensionator</Description>
+		<Copyright>© 2024 Ninetailsrabbit</Copyright>
+		<Authors>Ninetailsrabbit</Authors>
+		<Company>Ninetailsrabbit</Company>
+
+		<PackageId>Ninetailsrabbit.Extensionator</PackageId>
+		<PackageReleaseNotes>Ninetailsrabbit.Extensionator release.</PackageReleaseNotes>
+		<PackageTags>godot,plugin,extensions,csharp,gamedev,gamedevelopment</PackageTags>
+		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+		<!--<PackageLicenseFile>LICENSE</PackageLicenseFile>-->
+		<PackageProjectUrl>https://www.nuget.org/packages/Ninetailsrabbit.Extensionator/</PackageProjectUrl>
+
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/ninetailsrabbit/Extensionator</RepositoryUrl>
+		<!--<PackageIcon>icon.png</PackageIcon>-->
+	</PropertyGroup>
+
+	<!--<ItemGroup>
+		<None Include="../README.md" Pack="true" PackagePath="\" />
+		<None Include="../LICENSE" Pack="true" PackagePath="\" />
+		<None Include="icon.png" Pack="True" PackagePath="\" />
+	</ItemGroup>-->
+</Project>
