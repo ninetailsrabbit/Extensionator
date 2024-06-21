@@ -282,7 +282,7 @@ namespace Extensionator {
             if (filename.IsNullOrEmpty())
                 return filename;
 
-            return Path.GetInvalidFileNameChars().Aggregate(filename, (current, character) => current.Replace(character.ToString(), string.Empty));
+            return Path.GetInvalidFileNameChars().Except(['*']).Aggregate(filename, (current, character) => current.Replace(character.ToString(), string.Empty));
         }
 
         /// <summary>

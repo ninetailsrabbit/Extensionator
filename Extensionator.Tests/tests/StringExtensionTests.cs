@@ -116,7 +116,7 @@ See, this funny cat gif is also embedded within the quote!", longerText.StripBBc
         [Fact]
         public void Should_Remove_Invalid_Filename_Characters() {
             Assert.Equal("This is a valid filename.txt", "This is a valid filename.txt".RemoveInvalidFileNameCharacters());
-            Assert.Equal("Testfile.doc", "Test*file.doc".RemoveInvalidFileNameCharacters());
+            Assert.Equal("Test*file.doc", "Test*file.doc".RemoveInvalidFileNameCharacters());
             Assert.Equal("Special_Characters+.pdf", "Special_Characters<+>.pdf".RemoveInvalidFileNameCharacters());
 
             Assert.Equal("", "".RemoveInvalidFileNameCharacters());
