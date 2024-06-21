@@ -22,19 +22,19 @@
 
 		<PackageId>Ninetailsrabbit.Extensionator</PackageId>
 		<PackageReleaseNotes>Ninetailsrabbit.Extensionator release.</PackageReleaseNotes>
-		<PackageTags>godot,plugin,extensions,csharp,gamedev,gamedevelopment</PackageTags>
-		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
-		<!--<PackageLicenseFile>LICENSE</PackageLicenseFile>-->
+		<PackageTags>plugin,extensions,csharp,gamedev,gamedevelopment</PackageTags>
+		<PackageLicenseFile>README</PackageLicenseFile>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageProjectUrl>https://www.nuget.org/packages/Ninetailsrabbit.Extensionator/</PackageProjectUrl>
 
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/ninetailsrabbit/Extensionator</RepositoryUrl>
-		<!--<PackageIcon>icon.png</PackageIcon>-->
+		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 
-	<!--<ItemGroup>
+	<ItemGroup>
 		<None Include="../README.md" Pack="true" PackagePath="\" />
 		<None Include="../LICENSE" Pack="true" PackagePath="\" />
 		<None Include="icon.png" Pack="True" PackagePath="\" />
-	</ItemGroup>-->
+	</ItemGroup>
 </Project>
