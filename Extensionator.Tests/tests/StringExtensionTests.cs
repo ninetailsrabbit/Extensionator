@@ -1,4 +1,6 @@
-﻿namespace Extensionator.Tests {
+﻿using System.Runtime.InteropServices;
+
+namespace Extensionator.Tests {
     public class StringExtensionTests {
 
         [Fact]
@@ -116,8 +118,11 @@ See, this funny cat gif is also embedded within the quote!", longerText.StripBBc
         [Fact]
         public void Should_Remove_Invalid_Filename_Characters() {
             Assert.Equal("This is a valid filename.txt", "This is a valid filename.txt".RemoveInvalidFileNameCharacters());
-            Assert.Equal("Test*file.doc", "Test*file.doc".RemoveInvalidFileNameCharacters());
-            Assert.Equal("Special_Characters+.pdf", "Special_Characters<+>.pdf".RemoveInvalidFileNameCharacters());
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
+                Assert.Equal("Test*file.doc", "Test*file.doc".RemoveInvalidFileNameCharacters());
+                Assert.Equal("Special_Characters+.pdf", "Special_Characters<+>.pdf".RemoveInvalidFileNameCharacters());
+            }
 
             Assert.Equal("", "".RemoveInvalidFileNameCharacters());
             Assert.Equal(" ", " ".RemoveInvalidFileNameCharacters());
