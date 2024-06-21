@@ -176,6 +176,7 @@
         public void Should_Transform_All_Strings_To_Lower() {
             string[] names = ["ZeUS", "THOR", "LOKI", "atENEA", "GAIa"];
 
+
             foreach (var name in names.ToLower())
                 Assert.True(name.All(char.IsLower));
 
