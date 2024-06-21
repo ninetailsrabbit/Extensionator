@@ -1,6 +1,4 @@
-﻿using Extensionator.src;
-
-namespace Extensionator {
+﻿namespace Extensionator.Tests {
     public class GenericExtensionTests {
 
         struct Point {

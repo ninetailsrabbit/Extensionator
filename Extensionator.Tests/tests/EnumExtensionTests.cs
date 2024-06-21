@@ -1,4 +1,4 @@
-﻿namespace Extensionator {
+﻿namespace Extensionator.Tests {
     public class EnumExtensionTests {
 
         public enum STATES {

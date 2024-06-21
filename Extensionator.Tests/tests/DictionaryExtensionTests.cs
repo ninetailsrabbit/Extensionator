@@ -1,4 +1,4 @@
-﻿namespace Extensionator.Tests.tests {
+﻿namespace Extensionator.Tests {
     public class DictionaryExtensionTests {
 
         [Fact]

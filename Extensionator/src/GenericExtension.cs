@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Extensionator.src {
+﻿namespace Extensionator {
     public static class GenericExtension {
         /// <summary>
         /// Checks if a value is present within a given set of values.
@@ -18,7 +12,7 @@ namespace Extensionator.src {
         /// It's limited to value types (`struct`) due to array constraints.
         /// </remarks>
         public static bool In<T>(this T val, params T[] values) where T : struct => values.Contains(val);
-        
+
 
         /// <summary>
         /// Checks if a value is present within a collection of values.
@@ -32,6 +26,6 @@ namespace Extensionator.src {
         /// It works with both value types (`struct`) and reference types (`class`).
         /// </remarks>
         public static bool In<T>(this T val, IEnumerable<T> values) where T : struct => values.Contains(val);
-        
+
     }
 }
