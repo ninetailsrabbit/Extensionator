@@ -27,5 +27,6 @@
         /// </remarks>
         public static bool In<T>(this T val, IEnumerable<T> values) where T : struct => values.Contains(val);
 
+
     }
 }

@@ -30,5 +30,18 @@
             }
         }
 
+        [Fact]
+        public void Should_Convert_A_String_Into_A_Enum_Value() {
+            string value = "paTrol";
+
+            Assert.Throws<ArgumentException>(() => value.ToEnum<STATES>());
+
+            value = "PATROL";
+            Assert.Equal(STATES.PATROL, value.ToEnum<STATES>());
+
+            value = "JUMP";
+            Assert.Equal(STATES.IDLE, value.ToEnumOrDefault(STATES.IDLE));
+        }
+
     }
 }

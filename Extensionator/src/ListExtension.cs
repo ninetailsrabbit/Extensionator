@@ -355,6 +355,26 @@ namespace Extensionator {
         public static int FrequencyOf<T>(this IEnumerable<T> sequence, T target)
             => sequence.RemoveNullables().Where(element => element.Equals(target)).Count();
 
+        public static List<List<T>> ChunkBy<T>(this IEnumerable<T> sequence, int chunkSize = 1) {
+            chunkSize = Math.Max(1, chunkSize);
+
+            return sequence
+                .Select((x, i) => new { Index = i, Value = x })
+                .GroupBy(x => x.Index / chunkSize)
+                .Select(x => x.Select(v => v.Value).ToList())
+                .ToList();
+        }
+
+        /// <summary>
+        /// Converts a single item into a one-element IEnumerable sequence.
+        /// </summary>
+        /// <typeparam name="T">The type of the item.</typeparam>
+        /// <param name="item">The single item to be converted into a sequence.</param>
+        /// <returns>An IEnumerable sequence containing the provided item.</returns>
+        public static IEnumerable<T> Only<T>(this T item) {
+            yield return item;
+        }
+
         /// <summary>
         /// Converts all strings in a sequence to lowercase.
         /// </summary>
@@ -370,9 +390,8 @@ namespace Extensionator {
         /// </remarks>
         [Pure]
         public static IEnumerable<string> ToLower(this IEnumerable<string> sequence) {
-            foreach (string str in sequence) {
+            foreach (string str in sequence)
                 yield return str.ToLower();
-            }
         }
 
         /// <summary>
@@ -388,10 +407,17 @@ namespace Extensionator {
         /// </remarks>
         [Pure]
         public static IEnumerable<string> ToUpper(this IEnumerable<string> sequence) {
-            foreach (string str in sequence) {
+            foreach (string str in sequence)
                 yield return str.ToUpper();
-            }
         }
+
+        /// <summary>
+        /// Checks if the specified sequence is null or empty.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the sequence.</typeparam>
+        /// <param name="sequence">The sequence to check.</param>
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> sequence) => sequence == null || !sequence.Any();
+
 
     }
 }

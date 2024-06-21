@@ -96,6 +96,8 @@ See, this funny cat gif is also embedded within the quote!", longerText.StripBBc
         [Fact]
         public void Should_Repeat_Selected_String() {
             Assert.Equal("*****", "*".Repeat(5));
+            Assert.Equal("*****", '*'.Repeat(5)); // Should work with char values also
+
             Assert.Equal("eat my face eat my face ", "eat my face ".Repeat(2));
         }
 

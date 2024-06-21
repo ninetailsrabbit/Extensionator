@@ -189,5 +189,34 @@
             foreach (var name in names.ToUpper())
                 Assert.True(name.All(char.IsUpper));
         }
+
+        [Fact]
+        public void Should_Divide_An_Enumerable_Into_Chunks_Of_Desired_Size() {
+            Assert.Empty(Enumerable.Empty<int>().ChunkBy(2));
+
+            var sequence = new List<string> { "a", "b", "c", "d", "e", "f" };
+            var chunks = sequence.ChunkBy(2);
+
+            Assert.Equal(3, chunks.Count);
+            Assert.Equal(["a", "b"], chunks[0]);
+            Assert.Equal(["c", "d"], chunks[1]);
+            Assert.Equal(["e", "f"], chunks[2]);
+
+            var sequence2 = new List<int> { 1, 2, 3, 4, 5 };
+            var chunks2 = sequence2.ChunkBy(2);
+
+            Assert.Equal(3, chunks.Count);
+            Assert.Equal([1, 2], chunks2[0]);
+            Assert.Equal([3, 4], chunks2[1]);
+            Assert.Equal([5], chunks2[2]);
+        }
+
+        [Fact]
+        public void Should_Create_List_With_One_Item() {
+            Assert.Equal(["hello"], "hello".Only());
+            Assert.Equal([2000], 2000.Only());
+            Assert.Equal([""], "".Only());
+
+        }
     }
 }

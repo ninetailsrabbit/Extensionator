@@ -132,6 +132,19 @@ namespace Extensionator {
             => new StringBuilder(value.Length * count).Insert(0, value, count).ToString();
 
         /// <summary>
+        /// Repeats a given char a specified number of times.
+        /// </summary>
+        /// <param name="value">The char to repeat.</param>
+        /// <param name="count">The number of times to repeat the char.</param>
+        /// <returns>A new string containing the repeated value.</returns>
+        /// <remarks>
+        /// This method uses a `StringBuilder` for efficient string concatenation when repeating a string multiple times.
+        /// It avoids creating temporary strings in each iteration, improving performance.
+        /// </remarks>
+        public static string Repeat(this char value, int count) => value.ToString().Repeat(count);
+
+
+        /// <summary>
         /// Checks if all characters in a string are uppercase letters.
         /// </summary>
         /// <param name="value">The string to check.</param>
@@ -317,8 +330,11 @@ namespace Extensionator {
         /// It then employs the `encoding.GetBytes` method to perform the conversion based on the chosen encoding.
         /// Selecting the appropriate encoding is essential to ensure accurate representation and avoid data corruption when converting the byte array back to a string.
         /// </remarks>
-
         public static byte[] ToBytes(this string value, Encoding encoding) => encoding.GetBytes(value);
+
+
+
+        #region RegularExpressions
 
         [GeneratedRegex(@"\[.+?\]")]
         private static partial Regex StripBBCodeRegex();
@@ -328,5 +344,6 @@ namespace Extensionator {
 
         [GeneratedRegex("<[^>]*>", RegexOptions.Compiled)]
         private static partial Regex StripHtmlRegex();
+        #endregion
     }
 }
