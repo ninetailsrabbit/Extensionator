@@ -1,18 +1,23 @@
-﻿namespace Extensionator.Tests {
-    public class ListExtensionTests {
+﻿namespace Extensionator.Tests
+{
+    public class ListExtensionTests
+    {
 
         [Fact]
-        public void Should_Map_Enumerable_With_Index() {
+        public void Should_Map_Enumerable_With_Index()
+        {
             var people = new List<string>() { "john", "esmeralda", "dragon", "powerlifter" };
 
-            foreach ((string name, int index) in people.WithIndex()) {
+            foreach ((string name, int index) in people.WithIndex())
+            {
                 Assert.Contains(name, people);
                 Assert.Equal(name, people[index]);
             }
         }
 
         [Fact]
-        public void Should_Return_The_Diff_From_Two_Enumerables() {
+        public void Should_Return_The_Diff_From_Two_Enumerables()
+        {
             var people = new List<string>() { "john", "esmeralda", "dragon", "powerlifter" };
             var otherPeople = new List<string>() { "john", "esmeralda", "fox", "crossfitero" };
 
@@ -24,7 +29,8 @@
         }
 
         [Fact]
-        public void Should_Remove_And_Return_First_Element_With_Pop_Front_Functions() {
+        public void Should_Remove_And_Return_First_Element_With_Pop_Front_Functions()
+        {
             var people = new List<string>() { "john", "esmeralda", "dragon", "powerlifter" };
             int originalSize = people.Count;
 
@@ -39,7 +45,8 @@
         }
 
         [Fact]
-        public void Should_Remove_And_Return_First_Element_With_Pop_Back_Functions() {
+        public void Should_Remove_And_Return_First_Element_With_Pop_Back_Functions()
+        {
             var people = new List<string>() { "john", "esmeralda", "dragon", "powerlifter" };
             int originalSize = people.Count;
 
@@ -54,7 +61,8 @@
         }
 
         [Fact]
-        public void Should_Remove_And_Return_Element_On_Selected_Index_With_Pop_At_Functions() {
+        public void Should_Remove_And_Return_Element_On_Selected_Index_With_Pop_At_Functions()
+        {
             var people = new List<string>() { "john", "esmeralda", "dragon", "powerlifter" };
             int originalSize = people.Count;
 
@@ -68,7 +76,8 @@
         }
 
         [Fact]
-        public void Should_Retrieve_The_Last_Index_From_An_Enumerable() {
+        public void Should_Retrieve_The_Last_Index_From_An_Enumerable()
+        {
             var people = new List<string>() { "john", "esmeralda", "dragon", "powerlifter" };
             int[] numbers = [1, 2, 3, 4, 5];
             int[] empty = [];
@@ -81,7 +90,8 @@
         }
 
         [Fact]
-        public void Should_Get_Middle_Element() {
+        public void Should_Get_Middle_Element()
+        {
             int[] numbers = [1, 2, 3, 4, 5];
             int[] numbers2 = [1, 2, 4, 5];
             int[] numbers3 = [1, 2];
@@ -93,7 +103,8 @@
         }
 
         [Fact]
-        public void Should_Filter_Enumerable_String_Without_Empty_Values() {
+        public void Should_Filter_Enumerable_String_Without_Empty_Values()
+        {
             string[] names = ["zeus", "", "thor", "loki", "", ""];
 
             Assert.Equal(6, names.Length);
@@ -105,7 +116,8 @@
         }
 
         [Fact]
-        public void Should_Calculate_The_Mean_From_Int_Enumerable() {
+        public void Should_Calculate_The_Mean_From_Int_Enumerable()
+        {
             int[] numbers = [1, 2, 3, 4, 5];
 
             Assert.Equal(0, Array.Empty<int>().Mean());
@@ -114,7 +126,8 @@
         }
 
         [Fact]
-        public void Should_Calculate_The_Mean_From_Float_Enumerable() {
+        public void Should_Calculate_The_Mean_From_Float_Enumerable()
+        {
             List<float> numbers = [3.14f, 2.72f, 1.6f, 4.5f, 9.2f];
 
             Assert.Equal(0, Array.Empty<int>().Mean());
@@ -123,10 +136,12 @@
         }
 
         [Fact]
-        public void Should_Get_Random_Value_From_A_List() {
+        public void Should_Get_Random_Value_From_A_List()
+        {
             string[] names = ["zeus", "thor", "loki", "atenea", "gaia"];
 
-            foreach (var _ in Enumerable.Range(1, 50)) {
+            foreach (var _ in Enumerable.Range(1, 50))
+            {
                 string name = names.RandomElement();
 
                 Assert.Contains(name, names);
@@ -134,7 +149,8 @@
 
             var random = new Random(42);
 
-            foreach (var _ in Enumerable.Range(1, 50)) {
+            foreach (var _ in Enumerable.Range(1, 50))
+            {
                 string name = names.RandomElementUsing(random);
 
                 Assert.Contains(name, names);
@@ -143,10 +159,12 @@
         }
 
         [Fact]
-        public void Should_Get_Random_Values_From_A_List() {
+        public void Should_Get_Random_Values_From_A_List()
+        {
             string[] names = ["zeus", "thor", "loki", "atenea", "gaia"];
 
-            foreach (var _ in Enumerable.Range(1, 25)) {
+            foreach (var _ in Enumerable.Range(1, 25))
+            {
                 var items = names.RandomElements(2);
 
                 Assert.Equal(2, items.Count());
@@ -155,7 +173,8 @@
 
             var random = new Random(42);
 
-            foreach (var _ in Enumerable.Range(1, 25)) {
+            foreach (var _ in Enumerable.Range(1, 25))
+            {
                 var items = names.RandomElementsUsing(3, random);
 
                 Assert.Equal(3, items.Count());
@@ -164,7 +183,8 @@
         }
 
         [Fact]
-        public void Should_Detect_The_Frequency_Of_An_Element_From_An_Enumerable() {
+        public void Should_Detect_The_Frequency_Of_An_Element_From_An_Enumerable()
+        {
             int[] numbers = [1, 1, 3, 6, 6, 6, 6, 8, 9];
 
             Assert.Equal(2, numbers.FrequencyOf(1));
@@ -173,7 +193,8 @@
         }
 
         [Fact]
-        public void Should_Transform_All_Strings_To_Lower() {
+        public void Should_Transform_All_Strings_To_Lower()
+        {
             string[] names = ["ZeUS", "THOR", "LOKI", "atENEA", "GAIa"];
 
 
@@ -183,7 +204,8 @@
         }
 
         [Fact]
-        public void Should_Transform_All_Strings_To_Upper() {
+        public void Should_Transform_All_Strings_To_Upper()
+        {
             string[] names = ["zeus", "thor", "loki", "atenea", "gaia"];
 
             foreach (var name in names.ToUpper())
@@ -191,7 +213,8 @@
         }
 
         [Fact]
-        public void Should_Divide_An_Enumerable_Into_Chunks_Of_Desired_Size() {
+        public void Should_Divide_An_Enumerable_Into_Chunks_Of_Desired_Size()
+        {
             Assert.Empty(Enumerable.Empty<int>().ChunkBy(2));
 
             var sequence = new List<string> { "a", "b", "c", "d", "e", "f" };
@@ -212,7 +235,8 @@
         }
 
         [Fact]
-        public void Should_Create_List_With_One_Item() {
+        public void Should_Create_List_With_One_Item()
+        {
             Assert.Equal(["hello"], "hello".Only());
             Assert.Equal([2000], 2000.Only());
             Assert.Equal([""], "".Only());

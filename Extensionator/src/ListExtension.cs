@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics.Contracts;
 
-namespace Extensionator {
-    public static class ListExtension {
+namespace Extensionator
+{
+    public static class ListExtension
+    {
         private static readonly Random _rng = new(Guid.NewGuid().GetHashCode());
 
 
@@ -19,7 +21,8 @@ namespace Extensionator {
         public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> sequence)
             => sequence.Select((item, index) => (item, index));
 
-        public static List<T> Diff<T>(this IList<T> sequence, IList<T> otherSequence) {
+        public static List<T> Diff<T>(this IList<T> sequence, IList<T> otherSequence)
+        {
             ArgumentException.ThrowIfNullOrEmpty(nameof(sequence));
             ArgumentException.ThrowIfNullOrEmpty(nameof(otherSequence));
 
@@ -34,7 +37,8 @@ namespace Extensionator {
         /// <exception cref="ArgumentException">Thrown if the sequence is null or empty.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if the index is less than 0 or greater than the last index of the sequence.</exception>
         /// <returns>The element that was removed at the specified index.</returns>
-        public static T PopAt<T>(this IList<T> sequence, int index) {
+        public static T PopAt<T>(this IList<T> sequence, int index)
+        {
             ArgumentException.ThrowIfNullOrEmpty(nameof(sequence), "Cannot pop at in an empty collection");
             ArgumentOutOfRangeException.ThrowIfGreaterThan(index, sequence.LastIndex());
 
@@ -50,7 +54,8 @@ namespace Extensionator {
         /// <param name="sequence">The list to remove the element from.</param>
         /// <exception cref="ArgumentException">Thrown if the sequence is null or empty.</exception>
         /// <returns>The first element of the list.</returns>
-        public static T PopFront<T>(this IList<T> sequence) {
+        public static T PopFront<T>(this IList<T> sequence)
+        {
             ArgumentException.ThrowIfNullOrEmpty(nameof(sequence), "Cannot pop front an empty collection");
 
             var result = sequence.First();
@@ -65,7 +70,8 @@ namespace Extensionator {
         /// <param name="sequence">The list to remove the element from.</param>
         /// <exception cref="ArgumentException">Thrown if the sequence is null or empty.</exception>
         /// <returns>The last element of the list.</returns>
-        public static T PopBack<T>(this IList<T> sequence) {
+        public static T PopBack<T>(this IList<T> sequence)
+        {
             ArgumentException.ThrowIfNullOrEmpty(nameof(sequence), "Cannot pop back an empty collection");
 
             var result = sequence[^1];
@@ -94,8 +100,10 @@ namespace Extensionator {
         /// <param name="sequence">The IList to find the middle element of.</param>
         /// <returns>The middle element of the sequence if it has at least 3 elements, throws an ArgumentException otherwise.</returns>
         /// <exception cref="ArgumentException">Thrown if the sequence has less than 3 elements.</exception>
-        public static T MiddleElement<T>(this IList<T> sequence) {
-            if (sequence.Count >= 3) {
+        public static T MiddleElement<T>(this IList<T> sequence)
+        {
+            if (sequence.Count >= 3)
+            {
                 int middleIndex = (sequence.Count - 1) / 2;
 
                 return sequence[middleIndex];
@@ -141,7 +149,8 @@ namespace Extensionator {
         /// <param name="sequence">The IEnumerable sequence to check for emptiness.</param>
         /// <returns>True if the sequence contains no elements, False otherwise.</returns>
         /// <exception cref="ArgumentNullException">Throws an ArgumentNullException if the input sequence is null.</exception>
-        public static bool IsEmpty<T>(this IEnumerable<T> sequence) {
+        public static bool IsEmpty<T>(this IEnumerable<T> sequence)
+        {
             ArgumentNullException.ThrowIfNull(sequence);
 
             return !sequence.Any();
@@ -152,10 +161,12 @@ namespace Extensionator {
         /// </summary>
         /// <typeparam name="T">The type of elements contained in the IList.</typeparam>
         /// <param name="sequence">The IList to be shuffled.</param>
-        public static void Shuffle<T>(this IList<T> sequence) {
+        public static void Shuffle<T>(this IList<T> sequence)
+        {
             int n = sequence.Count;
 
-            while (n > 1) {
+            while (n > 1)
+            {
                 n--;
                 int k = _rng.Next(n + 1);
                 (sequence[n], sequence[k]) = (sequence[k], sequence[n]);
@@ -167,7 +178,8 @@ namespace Extensionator {
         /// </summary>
         /// <param name="numbers">The sequence of integer numbers.</param>
         /// <returns>The average value of the numbers, or 0 if the sequence is empty.</returns>
-        public static int Average(this IEnumerable<int> numbers) {
+        public static int Average(this IEnumerable<int> numbers)
+        {
             if (numbers.IsEmpty())
                 return 0;
 
@@ -193,7 +205,8 @@ namespace Extensionator {
         /// </summary>
         /// <param name="numbers">The sequence of floating-point numbers.</param>
         /// <returns>The average value of the numbers, or 0.0f if the sequence is empty.</returns>
-        public static float Average(this IEnumerable<float> numbers) {
+        public static float Average(this IEnumerable<float> numbers)
+        {
             if (numbers.IsEmpty())
                 return 0.0f;
 
@@ -245,14 +258,19 @@ namespace Extensionator {
         /// 
         /// This process continues until all nested collections are flattened, resulting in a single sequence of elements from the original structure.
         /// </remarks>
-        public static IEnumerable<T> Flatten<T>(this IEnumerable<T> enumerable) {
-            foreach (T element in enumerable) {
-                if (element is IEnumerable<T> candidate) {
-                    foreach (T nested in Flatten<T>(candidate)) {
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<T> enumerable)
+        {
+            foreach (T element in enumerable)
+            {
+                if (element is IEnumerable<T> candidate)
+                {
+                    foreach (T nested in Flatten<T>(candidate))
+                    {
                         yield return nested;
                     }
                 }
-                else {
+                else
+                {
                     yield return element;
                 }
             }
@@ -266,7 +284,8 @@ namespace Extensionator {
         /// <param name="selector">A function that selects a sequence of elements for each element in the source.</param>
         /// <returns>A flattened sequence containing all elements from the source and nested sequences selected by the selector.</returns>
         /// <exception cref="ArgumentNullException">Throws if source or selector is null.</exception>
-        public static IEnumerable<T> SelectManyRecursive<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> selector) {
+        public static IEnumerable<T> SelectManyRecursive<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> selector)
+        {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
@@ -296,7 +315,6 @@ namespace Extensionator {
         /// This function utilizes an extension method to simplify random element selection. It delegates the actual logic to the `RandomElementUsing` function, passing a newly created `Random` instance for internal use.
         /// </remarks>
         public static T RandomElement<T>(this IEnumerable<T> sequence) => sequence.RandomElementUsing<T>(_rng);
-
         /// <summary>
         /// Selects a random element from the provided sequence using a specified Random instance.
         /// </summary>
@@ -305,7 +323,8 @@ namespace Extensionator {
         /// <param name="rand">The Random instance to use for generating randomness (optional, new Random() used by default in RandomElement).</param>
         /// <returns>A random element from the sequence.</returns>
 
-        public static T RandomElementUsing<T>(this IEnumerable<T> sequence, Random rand) {
+        public static T RandomElementUsing<T>(this IEnumerable<T> sequence, Random rand)
+        {
             int index = rand.Next(0, sequence.Count());
             return sequence.ElementAt(index);
         }
@@ -330,7 +349,8 @@ namespace Extensionator {
         /// <param name="number">The number of random elements to retrieve.</param>
         /// <param name="rand">The Random instance to use for generating randomness (optional, new Random() used by default in RandomElements).</param>
         /// <returns>An IEnumerable collection containing the selected random elements.</returns>
-        public static IEnumerable<T> RandomElementsUsing<T>(this T[] sequence, int number, Random rand) {
+        public static IEnumerable<T> RandomElementsUsing<T>(this T[] sequence, int number, Random rand)
+        {
             number = Math.Min(number, sequence.Length);
 
             return Enumerable
@@ -355,7 +375,8 @@ namespace Extensionator {
         public static int FrequencyOf<T>(this IEnumerable<T> sequence, T target)
             => sequence.RemoveNullables().Where(element => element.Equals(target)).Count();
 
-        public static List<List<T>> ChunkBy<T>(this IEnumerable<T> sequence, int chunkSize = 1) {
+        public static List<List<T>> ChunkBy<T>(this IEnumerable<T> sequence, int chunkSize = 1)
+        {
             chunkSize = Math.Max(1, chunkSize);
 
             return sequence
@@ -371,7 +392,8 @@ namespace Extensionator {
         /// <typeparam name="T">The type of the item.</typeparam>
         /// <param name="item">The single item to be converted into a sequence.</param>
         /// <returns>An IEnumerable sequence containing the provided item.</returns>
-        public static IEnumerable<T> Only<T>(this T item) {
+        public static IEnumerable<T> Only<T>(this T item)
+        {
             yield return item;
         }
 
@@ -389,7 +411,8 @@ namespace Extensionator {
         /// The original `enumerable` object remains unmodified.
         /// </remarks>
         [Pure]
-        public static IEnumerable<string> ToLower(this IEnumerable<string> sequence) {
+        public static IEnumerable<string> ToLower(this IEnumerable<string> sequence)
+        {
             foreach (string str in sequence)
                 yield return str.ToLower();
         }
@@ -406,7 +429,8 @@ namespace Extensionator {
         /// A new sequence containing the uppercase strings is returned, leaving the original `enumerable` intact.
         /// </remarks>
         [Pure]
-        public static IEnumerable<string> ToUpper(this IEnumerable<string> sequence) {
+        public static IEnumerable<string> ToUpper(this IEnumerable<string> sequence)
+        {
             foreach (string str in sequence)
                 yield return str.ToUpper();
         }

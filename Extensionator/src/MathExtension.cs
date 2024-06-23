@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 
-namespace Extensionator {
-    public static class MathExtension {
+namespace Extensionator
+{
+    public static class MathExtension
+    {
 
         public static readonly float DEG2RAD = 57.29578f;
         public static readonly float COMMON_EPSILON = 0.000001f;  // 1.0e-6
@@ -79,7 +81,8 @@ namespace Extensionator {
         /// <param name="max">The maximum value of the range.</param>
         /// <param name="inclusive">Optional flag indicating whether the range includes the minimum and maximum values (default: true).</param>
         /// <returns>True if the value is between min and max (inclusive or exclusive based on the flag), False otherwise.</returns>
-        public static bool IsBetween(this int value, int min, int max, bool inclusive = true) {
+        public static bool IsBetween(this int value, int min, int max, bool inclusive = true)
+        {
             int minValue = Math.Min(min, max);
             int maxValue = Math.Max(min, max);
 
@@ -95,7 +98,8 @@ namespace Extensionator {
         /// <param name="inclusive">Optional flag indicating whether the range includes the minimum and maximum values (default: true).</param>
         /// <param name="precision">Optional precision value to account for floating-point rounding errors (default: 0.00001f).</param>
         /// <returns>True if the value is between min and max (inclusive or exclusive based on the flag), False otherwise.</returns>
-        public static bool IsBetween(this float value, float min, float max, bool inclusive = true, float precision = 0.00001f) {
+        public static bool IsBetween(this float value, float min, float max, bool inclusive = true, float precision = 0.00001f)
+        {
             float minValue = Math.Min(min, max) - precision;
             float maxValue = Math.Max(min, max) + precision;
 
@@ -108,7 +112,8 @@ namespace Extensionator {
         /// <param name="value">The integer value to format.</param>
         /// <param name="separator">Optional character to use as the thousand separator (default: comma).</param>
         /// <returns>The formatted string with thousand separators.</returns>
-        public static string ThousandSeparator(this int value, string separator = ",") {
+        public static string ThousandSeparator(this int value, string separator = ",")
+        {
             bool wasNegative = value.IsNegative();
             value = Math.Abs(value);
 
@@ -116,7 +121,8 @@ namespace Extensionator {
             float mod = numberAsText.Length % 3;
             string result = string.Empty;
 
-            foreach (int index in Enumerable.Range(0, numberAsText.Length)) {
+            foreach (int index in Enumerable.Range(0, numberAsText.Length))
+            {
                 if (index != 0 && index % 3 == mod)
                     result += separator;
 
@@ -133,7 +139,8 @@ namespace Extensionator {
         /// <param name="number">The float value to be biased.</param>
         /// <param name="bias">The bias value influencing the output (0 for no bias, 1 for full bias).</param>
         /// <returns>The biased float value.</returns>
-        public static float Bias(this float number, float bias) {
+        public static float Bias(this float number, float bias)
+        {
             float k = (float)Math.Pow(1.0f - bias, 3);
 
             return (number * k) / (number * k - number + 1);
@@ -145,7 +152,8 @@ namespace Extensionator {
         /// <param name="number">The float value to be processed by the sigmoid function.</param>
         /// <param name="scalingFactor">Optional scaling factor affecting the steepness of the curve (default: 0, no scaling).</param>
         /// <returns>The sigmoid value of the input number.</returns>
-        public static float Sigmoid(this float number, float scalingFactor = 0.0f) {
+        public static float Sigmoid(this float number, float scalingFactor = 0.0f)
+        {
             if (scalingFactor.IsZero())
                 return (float)(1 / (1 + Math.Exp(-number)));
 
@@ -158,7 +166,8 @@ namespace Extensionator {
         /// <param name="number">The non-negative integer for which to calculate the factorial.</param>
         /// <returns>The factorial value of the number (0! = 1, 1! = 1, n! = n * (n-1)!).</returns>
         /// <exception cref="ArgumentOutOfRangeException">Throws if the number is negative.</exception>
-        public static int Factorial(this int number) {
+        public static int Factorial(this int number)
+        {
             if (number.IsZero() || number == 1)
                 return 1;
 
@@ -171,7 +180,8 @@ namespace Extensionator {
         /// <param name="number">The non-negative integer for which to calculate the factorial.</param>
         /// <returns>The factorial value of the number (0! = 1, 1! = 1, n! = n * (n-1)!).</returns>
         /// <exception cref="ArgumentOutOfRangeException">Throws if the number is negative.</exception>
-        public static float Factorial(this float number) {
+        public static float Factorial(this float number)
+        {
             if (number.IsZero() || number == 1)
                 return 1;
 
@@ -183,7 +193,8 @@ namespace Extensionator {
         /// </summary>
         /// <param name="number">The starting integer from which to calculate factorials.</param>
         /// <returns>An array containing factorials for all integers from 'number' onwards.</returns>
-        public static List<float> FactorialsFrom(this int number) {
+        public static List<float> FactorialsFrom(this int number)
+        {
             List<float> result = [];
 
             if (number == 0 || number == 1)
@@ -200,7 +211,8 @@ namespace Extensionator {
         /// </summary>
         /// <param name="number">The integer to convert.</param>
         /// <returns>A string representing the ordinal form of the number.</returns>
-        public static string ToOrdinal(this int number) {
+        public static string ToOrdinal(this int number)
+        {
             int middle = number % 100;
             string suffix;
 
@@ -228,7 +240,8 @@ namespace Extensionator {
         /// <param name="number">The number to snap.</param>
         /// <param name="step">The value to use as the snap increment.</param>
         /// <returns>The snapped number as a float.</returns>
-        public static float Snapped(this float number, float step) {
+        public static float Snapped(this float number, float step)
+        {
             if (step != 0)
                 number = (float)(Math.Floor(number / step + 0.5f) * step);
 
@@ -260,7 +273,8 @@ namespace Extensionator {
         /// <param name="suffixes">Optional array of suffixes for different magnitude levels (defaults to ["", "K", "M", "B", "T"]). 
         /// If null, default suffixes are used.</param>
         /// <returns>A string representing the number in a human-readable format with a magnitude suffix (if applicable).</returns>
-        public static string PrettyNumber(this float number, string[]? suffixes = null) {
+        public static string PrettyNumber(this float number, string[]? suffixes = null)
+        {
             suffixes ??= ["", "K", "M", "B", "T"];
 
             string prefixSign = Math.Sign(number) == -1 ? "-" : "";
@@ -269,7 +283,8 @@ namespace Extensionator {
 
             int exponent = 0;
 
-            while (numberToPretty >= 1000) {
+            while (numberToPretty >= 1000)
+            {
                 numberToPretty /= 1000.0f;
                 exponent += 1;
             }
@@ -282,7 +297,8 @@ namespace Extensionator {
         /// </summary>
         /// <param name="number">The integer to convert.</param>
         /// <returns>A string representing the binary form of the integer.</returns>
-        public static string ToBinary(this int number) {
+        public static string ToBinary(this int number)
+        {
             if (number < 0)
                 throw new OverflowException("Number cannot be negative to transform into binary representation");
 
@@ -292,7 +308,8 @@ namespace Extensionator {
             string binaryString = string.Empty;
             int numberToTransform = number;
 
-            while (numberToTransform.IsGreaterThanZero()) {
+            while (numberToTransform.IsGreaterThanZero())
+            {
                 binaryString = $"{numberToTransform & 1}" + binaryString;
                 numberToTransform >>= 1;
             }
@@ -306,7 +323,8 @@ namespace Extensionator {
         /// <param name="time">The time value in seconds.</param>
         /// <param name="useMilliseconds">True to include milliseconds in the output format, False for minutes and seconds only (default).</param>
         /// <returns>A string representing the formatted time in minutes:seconds or minutes:seconds:milliseconds.</returns>
-        public static string ToFormattedSeconds(this float time, bool useMilliseconds = false) {
+        public static string ToFormattedSeconds(this float time, bool useMilliseconds = false)
+        {
             int minutes = (int)Math.Floor(time / 60);
             int seconds = (int)(time % 60);
 
@@ -370,7 +388,8 @@ namespace Extensionator {
         /// Finally, the first element (index 0) of the byte array is returned as the resulting byte.
         /// </remarks>
         /// 
-        public static byte ToByte(this BitArray bits) {
+        public static byte ToByte(this BitArray bits)
+        {
             if (bits.Count != 8)
                 throw new ArgumentException("BitsToByte: Bits needs to have a length of 8");
 
@@ -391,7 +410,8 @@ namespace Extensionator {
         /// If not, an ArgumentException is thrown. Otherwise, it creates a new BitArray and sets each bit based on the corresponding boolean value.
         /// Finally, the BitsToByte method is called to convert the BitArray to a byte.
         /// </remarks>
-        public static byte ToByte(this bool[] bools) {
+        public static byte ToByte(this bool[] bools)
+        {
             if (bools.Length > 8)
                 throw new ArgumentException("BoolsToByte: This method only support 8 bools at a time");
 
@@ -412,7 +432,8 @@ namespace Extensionator {
         /// <remarks>
         /// This method creates a byte array containing the single byte and then converts it to a BitArray using the built-in constructor.
         /// </remarks>
-        public static BitArray ToBits(this byte b) {
+        public static BitArray ToBits(this byte b)
+        {
             byte[] bytes = [b];
 
             return new BitArray(bytes);
@@ -425,7 +446,8 @@ namespace Extensionator {
         /// <param name="length">The desired length of the boolean array. (Must be less than or equal to 8)</param>
         /// <returns>An array of booleans representing the bits of the byte, padded with false if the length is less than 8.</returns>
         /// <exception cref="ArgumentException">Thrown if the desired length is greater than 8.</exception>
-        public static bool[] ByteToBools(this byte b, int length) {
+        public static bool[] ByteToBools(this byte b, int length)
+        {
             bool[] bools = new bool[length];
 
             BitArray bits = b.ToBits();
