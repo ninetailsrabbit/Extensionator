@@ -2,6 +2,50 @@
     public static class DictionaryExtension {
 
         /// <summary>
+        /// Merge two dictionaries and return the result as a new Dictionary
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static Dictionary<TKey, TValue> Merge<TKey, TValue>(this IDictionary<TKey, TValue> source, IDictionary<TKey, TValue> target) where TKey : notnull
+            => source.Concat(target).ToDictionary(item => item.Key, item => item.Value);
+
+        /// <summary>
+        /// Creates a new dictionary with the keys and values swapped from the provided source dictionary.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the keys in the source dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the source dictionary (must not be null).</typeparam>
+        /// <param name="source">The source dictionary to invert.</param>
+        /// <returns>A new dictionary with swapped keys and values.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the source dictionary is null.</exception>
+        public static Dictionary<TValue, TKey> InvertKeyValue<TKey, TValue>(this IDictionary<TKey, TValue> source) where TValue : notnull
+            => source.ToDictionary(item => item.Value, item => item.Key);
+
+        /// <summary>
+        /// Finds the first key associated with a given value in a dictionary, or null if not found.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the dictionary (must not be null).</typeparam>
+        /// <param name="source">The dictionary to search.</param>
+        /// <param name="valueToFind">The value to search for.</param>
+        /// <returns>The first key associated with the value, or null if not found.</returns>
+        public static TKey? ReverseLookup<TKey, TValue>(this IDictionary<TKey, TValue> source, TValue valueToFind) where TValue : notnull
+            => source.FirstOrDefault(item => item.Value.Equals(valueToFind)).Key;
+
+        /// <summary>
+        /// Finds all keys associated with a given value in a dictionary and returns them as a list, or null if no keys are found.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the dictionary (must not be null).</typeparam>
+        /// <param name="source">The dictionary to search.</param>
+        /// <param name="valueToFind">The value to search for.</param>
+        /// <returns>A list of all keys associated with the value, or null if no keys are found.</returns>
+        public static List<TKey> ReverseLookupMultiple<TKey, TValue>(this IDictionary<TKey, TValue> source, TValue valueToFind) where TValue : notnull
+            => source.Where(item => item.Value.Equals(valueToFind)).Select(item => item.Key).ToList();
+
+        /// <summary>
         /// Adds all key-value pairs from another dictionary to the current dictionary.
         /// </summary>
         /// <typeparam name="TKey">The type of keys in the dictionaries.</typeparam>

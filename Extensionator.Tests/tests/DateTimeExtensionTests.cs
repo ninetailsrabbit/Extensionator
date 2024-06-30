@@ -13,17 +13,17 @@ namespace Extensionator.Tests {
         [Fact]
         public void Should_Add_Weeks_Correctly() {
             var today = DateTime.Now;
-            var currentDay = today.Day;
+            var currentDate = DateTime.Now;
 
             var dateModified = today.AddWeeks(1);
 
-            Assert.Equal(currentDay + 7, dateModified.Day);
+            Assert.Equal(currentDate.AddDays(7).Day, dateModified.Day);
         }
 
         [Fact]
         public void Should_Calculate_Age_From_Specific_Year() {
             var mock = new Mock<IDateTimeHelper>();
-            mock.Setup(fake => fake.GetDateTimeNow()).Returns(new DateTime(2024, 10, 10));
+            mock.Setup(fake => fake.GetDateTimeNow()).Returns(new DateTime(2021, 10, 10));
 
             var helper = new DateTimeHelper();
 

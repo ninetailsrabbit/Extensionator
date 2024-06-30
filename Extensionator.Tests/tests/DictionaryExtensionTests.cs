@@ -1,5 +1,44 @@
-﻿namespace Extensionator.Tests {
+﻿
+namespace Extensionator.Tests {
     public class DictionaryExtensionTests {
+
+        [Fact]
+        public void Should_Merge_Two_Dictionaries() {
+            Dictionary<string, string> source = new() { { "Superman", "Flight" } };
+            Dictionary<string, string> target = new() { { "Batman", "Gadgets" } };
+
+            var result = source.Merge(target);
+
+            Assert.True(result.ContainsAllKeys([.. source.Keys, .. target.Keys]));
+        }
+
+
+        [Fact]
+        public void Should_Invert_Key_Value_On_Dictionary() {
+            Dictionary<string, string> source = new() { { "Superman", "Flight" }, { "Batman", "Gadgets" } };
+
+            var result = source.InvertKeyValue();
+
+            Assert.Contains(["Flight", "Gadgets"], result.Keys.ToArray());
+            Assert.Contains(["Superman", "Batman"], result.Values.ToArray());
+
+            result = result.InvertKeyValue();
+
+            Assert.Contains(["Superman", "Batman"], result.Keys.ToArray());
+            Assert.Contains(["Flight", "Gadgets"], result.Values.ToArray());
+        }
+
+
+        [Fact]
+        public void Should_Reverse_Lookup_Key_By_Value() {
+            Dictionary<string, int> dimensions = new() { { "length", 10 }, { "width", 20 }, { "height", 30 }, { "deep", 30 } };
+
+            Assert.Null(dimensions.ReverseLookup(5));
+            Assert.Equal("length", dimensions.ReverseLookup(10));
+            Assert.Equal("width", dimensions.ReverseLookup(20));
+            Assert.Contains(["height", "deep"], dimensions.ReverseLookupMultiple(30).ToArray());
+            Assert.Empty(dimensions.ReverseLookupMultiple(300));
+        }
 
         [Fact]
         public void Should_Add_Range_Key_Value_To_Existing_Dictionary() {
