@@ -1,10 +1,11 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Extensionator {
 
     public static class DateTimeExtension {
 
-        const int DAYS_IN_A_WEEK = 7;
+        const int DaysInAWeek = 7;
 
         /// <summary>
         /// Adds a specified number of weeks to a DateTime object.
@@ -18,7 +19,7 @@ namespace Extensionator {
         /// </remarks>
 
         [Pure]
-        public static DateTime AddWeeks(this DateTime date, int numberOfWeeks) => date.AddDays(numberOfWeeks * DAYS_IN_A_WEEK);
+        public static DateTime AddWeeks(this DateTime date, int numberOfWeeks) => date.AddDays(numberOfWeeks * DaysInAWeek);
 
         /// <summary>
         /// Calculates the age in years based on a given date of birth.
@@ -35,6 +36,9 @@ namespace Extensionator {
         public static int Age(this DateTime dateOfBirth) {
             var today = DateTime.Today;
             var age = today.Year - dateOfBirth.Year;
+
+            //if (DateTime.Now < dateOfBirth.AddYears(age))
+            //    age--;
 
             return age;
         }

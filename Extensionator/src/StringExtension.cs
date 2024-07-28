@@ -6,14 +6,14 @@ namespace Extensionator {
     public static partial class StringExtension {
         private static readonly Random _rng = new(DateTime.Now.Millisecond);
 
-        public static readonly string HEX_CHARACTERS = "0123456789ABCDEF";
-        public static readonly string ASCII_ALPHANUMERIC = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        public static readonly string ASCII_LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        public static readonly string ASCII_LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
-        public static readonly string ASCII_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        public static readonly string ASCII_DIGITS = "0123456789";
-        public static readonly string ASCII_PUNCTUATION = "!\"#$%&'()*+, -./:;<=>?@[\\]^_`{|}~";
-        public static readonly string[] ESCAPE_CHARACTERS = ["\r", "\n", "\t", "\v", @"\c", @"\e", "\f", "\a", "\b", "\\", @"\NNN", @"\xHH"];
+        public static readonly string HexCharacters = "0123456789ABCDEF";
+        public static readonly string AsciiAphanumeric = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        public static readonly string AsciiLetters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public static readonly string AsciiLowercase = "abcdefghijklmnopqrstuvwxyz";
+        public static readonly string AsciiUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public static readonly string AsciiDigits = "0123456789";
+        public static readonly string AsciiPunctuation = "!\"#$%&'()*+, -./:;<=>?@[\\]^_`{|}~";
+        public static readonly string[] EscapeCharacters = ["\r", "\n", "\t", "\v", @"\c", @"\e", "\f", "\a", "\b", "\\", @"\NNN", @"\xHH"];
 
         /// <summary>
         /// Checks if a string represents a valid absolute URL (HTTP or HTTPS).
@@ -198,7 +198,7 @@ namespace Extensionator {
         /// This method checks if the character is included in the built-in `ASCII_PUNCTUATION` set.
         /// The `ASCII_PUNCTUATION` set contains various punctuation marks and symbols.
         /// </remarks>
-        public static bool IsSpecialCharacter(this char value) => value.In(ASCII_PUNCTUATION);
+        public static bool IsSpecialCharacter(this char value) => value.In(AsciiPunctuation);
 
         /// <summary>
         /// Checks if a string can be parsed into a valid integer.
@@ -223,7 +223,7 @@ namespace Extensionator {
         /// It utilizes the `Any` method from LINQ to perform the efficient check.
         /// </remarks>
         public static bool ContainsEscapeCharacters(this string value)
-            => ESCAPE_CHARACTERS.Any(value.Contains);
+            => EscapeCharacters.Any(value.Contains);
 
         /// <summary>
         /// Removes all escape characters from a string based on a predefined set.
@@ -238,7 +238,7 @@ namespace Extensionator {
         /// </remarks>
         public static string RemoveEscapeCharacters(this string value) {
             if (value.ContainsEscapeCharacters())
-                return string.Join("", value.Split(ESCAPE_CHARACTERS, StringSplitOptions.RemoveEmptyEntries));
+                return string.Join("", value.Split(EscapeCharacters, StringSplitOptions.RemoveEmptyEntries));
 
             return value;
         }
